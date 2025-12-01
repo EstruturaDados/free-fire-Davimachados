@@ -1,74 +1,123 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
+# 🔫🎒 Desafio Código da Ilha – Edição Free Fire
 
-typedef struct {
-    char nome[50];
-    char tipo[30];
-    int quantidade;
-} Item;
+Bem-vindo ao **Desafio Código da Ilha – Edição Free Fire!**  
+Neste desafio, você irá simular o gerenciamento de um **inventário de sobrevivência** em uma ilha misteriosa, utilizando a linguagem **C**.
 
-#define CAPACIDADE_MAXIMA 10
+A empresa **MateCheck** encarregou você de desenvolver o sistema de **mochila virtual** que ajudará os sobreviventes a se prepararem para escapar da ilha.  
+O desafio é dividido em três níveis: **Novato**, **Aventureiro** e **Mestre**, cada um com mais complexidade e poder.
 
-void exibirMenu();
-void adicionarItem(Item inventario[], int *totalItens);
-void removerItem(Item inventario[], int *totalItens);
-void listarItens(const Item inventario[], int totalItens);
-void limparBuffer();
 
-int main() {
-    Item mochila[CAPACIDADE_MAXIMA];
-    int totalItens = 0;
-    int opcao;
+## 🎮 Nível Novato: Inventário Básico
 
-    printf("🎒 Desafio Código da Ilha - Nível Novato\n");
-    printf("Sistema de Inventário Básico (Capacidade: %d itens)\n", CAPACIDADE_MAXIMA);
+### 🚩 Objetivo
 
-    do {
-        exibirMenu();
-        printf("Escolha uma opção: ");
-        
-        if (scanf("%d", &opcao) != 1) {
-            opcao = -1;
-            limparBuffer();
-        }
+Criar um programa em C com as seguintes funcionalidades:
 
-        switch (opcao) {
-            case 1:
-                adicionarItem(mochila, &totalItens);
-                break;
-            case 2:
-                removerItem(mochila, &totalItens);
-                break;
-            case 3:
-                listarItens(mochila, totalItens);
-                break;
-            case 0:
-                printf("\nSobrevivente, você está fora de perigo. O programa será encerrado.\n");
-                break;
-            default:
-                printf("\nOpção inválida. Tente novamente.\n");
-        }
-    } while (opcao != 0);
+- Adicionar itens à mochila (**nome**, **tipo** e **quantidade**)
+- Remover itens pelo nome
+- Listar os itens cadastrados
 
-    return 0;
-}
+### ⚙️ Funcionalidades
 
-void exibirMenu() {
-    printf("\n--- MOCHILA VIRTUAL ---\n");
-    printf("1. Adicionar Item\n");
-    printf("2. Remover Item (pelo nome)\n");
-    printf("3. Listar Itens\n");
-    printf("0. Sair\n");
-    printf("-------------------------\n");
-}
+- Utilização de `struct` para representar cada item
+- Vetor estático com capacidade para até **10 itens**
+- Leitura e escrita via terminal (`scanf`, `printf`)
+- Menu interativo com `switch` e `do-while`
 
-void limparBuffer() {
-    int c;
-    while ((c = getchar()) != '\n' && c != EOF);
-}
+### 🧠 Simplicidade
 
-void adicionarItem(Item inventario[], int *totalItens) {
-    if (*totalItens >= CAPACIDADE_MAXIMA) {
-        printf("\n⚠️ ERRO: A mochila está cheia! Remova itens para adicionar mais.\n
+- Sem ordenações, buscas especializadas ou uso de ponteiros
+- Ideal para praticar manipulação básica de estruturas e arrays
+
+### 📥 Entrada
+
+O usuário escolhe ações no menu e preenche os dados dos itens conforme solicitado.
+
+### 📤 Saída
+
+O programa exibe os dados organizados em formato de tabela, com nome, tipo e quantidade.
+
+
+
+## 🛡️ Nível Aventureiro: Mochila com Busca
+
+### 🆕 Diferenças em relação ao Nível Novato
+
+- Implementação de **busca sequencial** por nome
+- Novidade no menu: opção de **"Buscar item por nome"**
+- Exibição detalhada do item encontrado
+
+### ⚙️ Funcionalidades
+
+- O usuário pode procurar qualquer item já inserido
+- Se encontrado, o programa exibe seus atributos
+- Caso contrário, exibe mensagem de erro amigável
+
+### 💡 Conceitos Adicionados
+
+- **Busca sequencial**
+- **Comparação de strings** (`strcmp`)
+- **Controle com flag** para indicar se item foi encontrado
+
+### 📥 Entrada
+
+O usuário digita o nome do item que deseja buscar.
+
+### 📤 Saída
+
+- Detalhes completos do item (nome, tipo, quantidade)
+- Ou uma mensagem de erro, se não for encontrado
+
+---
+
+## 🧠 Nível Mestre: Ordenação e Busca Binária
+
+### 🆕 Diferenças em relação ao Nível Aventureiro
+
+- Adição do campo **prioridade** aos itens (valores de 1 a 5)
+- Possibilidade de **ordenar** a mochila por **nome**, **tipo** ou **prioridade**
+- Implementação da **busca binária** por nome com verificação de ordenação
+
+### ⚙️ Funcionalidades
+
+- **Menu de ordenação**: o jogador escolhe o critério desejado
+- Contador de **comparações na ordenação** para análise de desempenho
+- **Busca binária** com validação de pré-requisito (lista deve estar ordenada por nome)
+
+### 💡 Conceitos Adicionados
+
+- **Enumeração** (`enum`) para critérios de ordenação
+- **Ordenação com Insertion Sort**
+- **Busca binária** (`binary search`)
+- Uso de **bool** para controle de estado
+- **Análise de desempenho** com contador de comparações
+
+### 📥 Entrada
+
+O usuário:
+
+1. Adiciona itens com prioridade
+2. Ordena os itens
+3. Realiza busca binária pelo nome do item
+
+### 📤 Saída
+
+- Mochila **ordenada** com base no critério escolhido
+- Exibição dos **dados do item buscado** ou mensagem de erro
+- **Quantidade de comparações** realizadas durante a ordenação
+
+
+
+## 🏁 Conclusão
+
+Ao completar qualquer nível do **Desafio Código da Ilha – Edição Free Fire**, você terá avançado significativamente na programação em **C**, desenvolvendo habilidades práticas de:
+
+- Manipulação de **estruturas e arrays**
+- Criação de **menus interativos**
+- Implementação de **buscas e ordenações**
+- **Pensamento modular** e boas práticas de software
+
+Cada nível representa uma missão rumo à **sobrevivência total**.  
+Escolha seu nível, prepare sua mochila... e **boa sorte na ilha!** 🏝️💼🔍
+
 > Equipe de Ensino – MateCheck
